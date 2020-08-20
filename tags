@@ -1,4 +1,0 @@
-Gender	src/main.rs	/^enum Gender {$/
-Mmain.rs	src/main.rs	/^fn main() {$/
-Person	src/main.rs	/^struct Person {$/
-take_ownership	src/main.rs	/^fn take_ownership(string: &String) {$/
