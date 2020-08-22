@@ -1,7 +1,11 @@
 use std::collections::HashMap;
-use xox::show::show_name;
+use genesis::show::show_name;
 use std::fs::File;
 use std::io::Read;
+use std::thread;
+use std::time::Duration;
+use std::sync::mpsc;
+
 
 #[derive(Debug)]
 enum Gender {
@@ -29,6 +33,14 @@ impl Person {
 
     fn get_full_name(&self) -> String {
         format!("Fullname is : {} {}", self.first_name, self.last_name)
+    }
+}
+
+fn longer<'a>(x: &'a str, y: &'a str) -> &'a str {
+    if x.len() > y.len() {
+        x
+    } else {
+        y
     }
 }
 
@@ -72,6 +84,35 @@ fn main() {
     let mut text = String::from("import os");
     res.read_to_string(&mut text).unwrap();
     println!("{}", text);
-    let mut a: Vec<i32> = Vec::new();
+    let mut a: Vec<i32> = vec![1, 2, 3];
     a.push(1);
+    println!("{:?}",  a);
+
+    let handle = thread::spawn(|| {
+        for i in 1..10 {
+            println!("Spawn  : {}", i);
+            thread::sleep(Duration::from_micros(1));
+        }
+    });
+
+    handle.join().unwrap();
+
+    for i in 10..15 {
+        println!("From main {}", i);
+            thread::sleep(Duration::from_micros(1));
+    }
+
+    let (tx, rx) = mpsc::channel();
+    thread::spawn(move || {
+        let val = String::from("Hi");
+        tx.send(val).unwrap();
+    });
+    let rev = rx.recv().unwrap();
+    println!("I Got {}", rev);
+
+    let first = String::from("XXX");
+    let second = String::from("YYYYYY");
+    let longer = longer(first.as_str(), second.as_str());
+    println!("string which longer is {}", longer)
+
 }
