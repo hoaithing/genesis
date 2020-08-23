@@ -5,3 +5,11 @@ authors = ["cherry <hahungkk@gmail.com>"]
 edition = "2018"
 
 [dependencies]
+diesel = { version = "1.4.4", features = ["postgres"] }
+dotenv = "0.15.0"
+rocket = "0.4.5"
+
+[dependencies.rocket_contrib]
+version = "*"
+default-features = false
+features = ["json", "serve"]

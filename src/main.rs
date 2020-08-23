@@ -1,3 +1,5 @@
+#![feature(proc_macro_hygiene, decl_macro)]
+
 use std::collections::HashMap;
 use genesis::show::show_name;
 use std::fs::File;
@@ -5,6 +7,7 @@ use std::io::Read;
 use std::thread;
 use std::time::Duration;
 use std::sync::mpsc;
+#[macro_use] extern crate rocket;
 
 
 #[derive(Debug)]
@@ -42,6 +45,11 @@ fn longer<'a>(x: &'a str, y: &'a str) -> &'a str {
     } else {
         y
     }
+}
+
+#[get("/")]
+fn root() -> &'static str {
+    "Hello rocket web"
 }
 
 fn main() {
@@ -113,6 +121,8 @@ fn main() {
     let first = String::from("XXX");
     let second = String::from("YYYYYY");
     let longer = longer(first.as_str(), second.as_str());
-    println!("string which longer is {}", longer)
+    println!("string which longer is {}", longer);
+
+    rocket::ignite().mount("/", routes![root]).launch();
 
 }
