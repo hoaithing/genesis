@@ -1,20 +1,20 @@
 #![feature(proc_macro_hygiene, decl_macro)]
 
-use std::collections::HashMap;
 use genesis::show::show_name;
+use std::collections::HashMap;
 use std::fs::File;
 use std::io::Read;
+use std::sync::mpsc;
 use std::thread;
 use std::time::Duration;
-use std::sync::mpsc;
-#[macro_use] extern crate rocket;
-
+#[macro_use]
+extern crate rocket;
 
 #[derive(Debug)]
 enum Gender {
     Male,
     Female,
-    Other
+    Other,
 }
 
 #[derive(Debug)]
@@ -73,12 +73,8 @@ fn main() {
         Gender::Male => {
             println!("is male");
         }
-        Gender::Female => {
-            println!("is female")
-        }
-        _ => {
-            println!("GAYYYYYYY")
-        }
+        Gender::Female => println!("is female"),
+        _ => println!("GAYYYYYYY"),
     }
     let f = File::open("Cherrylove.py");
     let mut res = match f {
@@ -94,7 +90,7 @@ fn main() {
     println!("{}", text);
     let mut a: Vec<i32> = vec![1, 2, 3];
     a.push(1);
-    println!("{:?}",  a);
+    println!("{:?}", a);
 
     let handle = thread::spawn(|| {
         for i in 1..10 {
@@ -107,7 +103,7 @@ fn main() {
 
     for i in 10..15 {
         println!("From main {}", i);
-            thread::sleep(Duration::from_micros(1));
+        thread::sleep(Duration::from_micros(1));
     }
 
     let (tx, rx) = mpsc::channel();
@@ -124,5 +120,4 @@ fn main() {
     println!("string which longer is {}", longer);
 
     rocket::ignite().mount("/", routes![root]).launch();
-
 }

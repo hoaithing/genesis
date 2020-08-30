@@ -13,3 +13,6 @@ rocket = "0.4.5"
 version = "*"
 default-features = false
 features = ["json", "serve"]
+
+[profile.release]
+lto = true
