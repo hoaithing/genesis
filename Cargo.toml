@@ -1,18 +1,12 @@
 [package]
 name = "genesis"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["cherry <hahungkk@gmail.com>"]
 edition = "2018"
 
 [dependencies]
-diesel = { version = "1.4.4", features = ["postgres"] }
+reqwest = { version = "0.10", features = ["blocking", "json"] }
 dotenv = "0.15.0"
-rocket = "0.4.5"
-
-[dependencies.rocket_contrib]
-version = "*"
-default-features = false
-features = ["json", "serve"]
 
 [profile.release]
 lto = true

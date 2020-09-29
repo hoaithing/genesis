@@ -1,7 +1,5 @@
 use std::collections::HashMap;
-use genesis::show::show_name;
-use std::fs::File;
-use std::io::Read;
+use genesis::call_add;
 
 #[derive(Debug, Copy, Clone)]
 enum Gender {
@@ -30,10 +28,9 @@ impl Person {
 
     fn show_info(&self) {
         println!(
-            "{} {} is {:?}",
-            self.first_name, self.last_name, self.gender
+            "{} is {:?}",
+            self.get_full_name(), self.gender
         );
-        show_name(&self.first_name)
     }
 
     fn get_full_name(&self) -> String {
@@ -60,6 +57,17 @@ fn apply_to_3<F>(f: F) -> i32
         f(3)
 }
 
+#[allow(dead_code)]
+fn get_url(url: &str) -> Result<HashMap<String, String>, Box<dyn std::error::Error>>  {
+    let resp = reqwest::blocking::get(url)?
+        .json::<HashMap<String, String>>()?;
+    Ok(resp)
+}
+
+fn is_odd(x: u32) -> bool {
+    x % 2 == 1
+}
+
 fn main() {
     let mut person = Person {
         first_name: String::from("Cherry"),
@@ -69,30 +77,14 @@ fn main() {
     };
     let field_name = String::from("Favorite color");
     let field_value = String::from("Blue");
-    person.gender = Gender::Other;
-    person.show_info();
-    println!("{}", person.get_full_name());
     let mut new_hashmap = HashMap::new();
 
     new_hashmap.insert(&field_name, &field_value);
     println!("{}", new_hashmap.get(&field_name).unwrap());
 
+    person.gender = Gender::Other;
+    person.show_info();
     person.check_gender();
-
-    let f = File::open("Cherrylove.py");
-
-    let mut res = match f {
-        Result::Ok(file) => file,
-        Result::Err(error) => {
-            println!("Error {}", error);
-            let file = File::create("Cherrylove.py").unwrap();
-            file
-        }
-    };
-
-    let mut text = String::from("import os");
-    res.read_to_string(&mut text).unwrap();
-    println!("{}", text);
 
     let mut a: Vec<i32> = vec![1, 2, 3];
     a.push(1);
@@ -118,7 +110,15 @@ fn main() {
     println!("{}", contain(&element1));
     println!("There are {} element", haystack.len());
 
-    let double = |x| x * 2;
+    let double = |x: i32| -> i32 { x * 2 };
 
     println!("{}", apply_to_3(double));
+//    let url = "https://httpbin.org/ip";
+//    let res = get_url(url).unwrap();
+//    println!("{:#?}", res);
+    let new_fun = (0..20)
+        .filter(|&x| is_odd(x))
+        .fold(0, |acc, x| acc + x);
+    println!("{}", new_fun);
+    println!("{}", call_add(10, 20));
 }
