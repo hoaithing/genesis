@@ -1,5 +1,5 @@
 use std::collections::HashMap;
-use genesis::call_add;
+use genesis::{call_add, get_text_data};
 
 #[derive(Debug, Copy, Clone)]
 enum Gender {
@@ -121,4 +121,10 @@ fn main() {
         .fold(0, |acc, x| acc + x);
     println!("{}", new_fun);
     println!("{}", call_add(10, 20));
+
+    let person = get_text_data();
+    println!("{}", person.name);
+    println!("{}", person.age);
+    println!("{:?}", person.phones);
+
 }
