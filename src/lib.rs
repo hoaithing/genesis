@@ -20,7 +20,21 @@ pub struct CustomPerson {
     pub phones: Vec<String>,
 }
 
-pub fn number2text(number: u32, mapping: HashMap<u32, &str>) -> String {
+pub fn number2text(number: u32) -> String {
+    let mapping: HashMap<u32, &str> = [
+        (0, ""),
+        (1, "Một"),
+        (2, "Hai"),
+        (3, "Ba"),
+        (4, "Bốn"),
+        (5, "Năm"),
+        (6, "Sáu"),
+        (7, "Bảy"),
+        (8, "Tám"),
+        (9, "Chín"),
+        (10, "Mười")
+    ].iter().cloned().collect();
+
     return if number <= 10 {
         mapping.get(&number).unwrap().to_string()
     } else if number > 20 {

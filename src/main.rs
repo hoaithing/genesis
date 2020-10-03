@@ -69,20 +69,6 @@ fn is_odd(x: u32) -> bool {
 }
 
 fn main() {
-    let mapping: HashMap<u32, &str> = [
-        (0, ""),
-        (1, "Một"),
-        (2, "Hai"),
-        (3, "Ba"),
-        (4, "Bốn"),
-        (5, "Năm"),
-        (6, "Sáu"),
-        (7, "Bảy"),
-        (8, "Tám"),
-        (9, "Chín"),
-        (10, "Mười")
-    ].iter().cloned().collect();
-
     let mut person = Person {
         first_name: String::from("Cherry"),
         last_name: String::from("Love"),
@@ -140,6 +126,6 @@ fn main() {
     println!("{}", person.name);
     println!("{}", person.age);
     println!("{:?}", person.phones);
-    println!("{}", number2text(21, mapping))
+    println!("{}", number2text(21))
 
 }
