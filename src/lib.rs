@@ -1,15 +1,16 @@
 pub mod extras;
+
 use extras::extras::add;
 
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 use std::fs::OpenOptions;
 use std::io::BufReader;
-
+use std::collections::HashMap;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Point {
     x: u32,
-    y: u32
+    y: u32,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -19,31 +20,39 @@ pub struct CustomPerson {
     pub phones: Vec<String>,
 }
 
-static ZERO: i32 = 0;
-
-struct Foo<'a, 'b> {
-    x: &'a i32,
-    y: &'b i32,
-}
-
-fn get_x_or_zero_ref<'a, 'b>(x: &'a i32, y: &'b i32) -> &'a i32 {
-    return if *x > *y {
-        x
-    } else {
-        &ZERO
+pub fn number2text(number: u32, mapping: HashMap<u32, &str>) -> String {
+    return if number <= 10 {
+        mapping.get(&number).unwrap().to_string()
+    } else if number > 20 {
+        let unit_by_ten = mapping.get(&(&number / 10)).unwrap().to_string();
+        let unit_int = number % 10;
+        let mut unit = mapping.get(&unit_int).unwrap().to_string();
+        if unit == "0" {
+            return format!("{} Mươi", unit_by_ten);
+        }
+        else if unit_int == 1 {
+            unit = String::from("Mốt");
+        }
+        format!("{} Mươi {}", unit_by_ten, unit)
     }
+    else {
+        let unit = mapping.get(&(&number - 10)).unwrap().to_string();
+        format!("Mười {}", unit)
+    };
 }
 
 pub fn call_add(a: u32, b: u32) -> u32 {
     add(a, b)
 }
 
-
 pub fn get_text_data() -> CustomPerson {
     let point = Point { x: 1, y: 2 };
     let serialized = serde_json::to_string(&point).unwrap();
     println!("serialized = {}", serialized);
-    let file = OpenOptions::new().read(true).open("Cherrylove.json").unwrap();
+    let file = OpenOptions::new()
+        .read(true)
+        .open("Cherrylove.json")
+        .unwrap();
     let reader = BufReader::new(file);
     let deserialized: CustomPerson = serde_json::from_reader(reader).unwrap();
     deserialized
