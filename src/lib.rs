@@ -3,9 +3,9 @@ pub mod extras;
 use extras::extras::add;
 
 use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
 use std::fs::OpenOptions;
 use std::io::BufReader;
-use std::collections::HashMap;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Point {
@@ -32,8 +32,11 @@ pub fn number2text(number: u32) -> String {
         (7, "Bảy"),
         (8, "Tám"),
         (9, "Chín"),
-        (10, "Mười")
-    ].iter().cloned().collect();
+        (10, "Mười"),
+    ]
+    .iter()
+    .cloned()
+    .collect();
 
     return if number <= 10 {
         mapping.get(&number).unwrap().to_string()
@@ -43,13 +46,11 @@ pub fn number2text(number: u32) -> String {
         let mut unit = mapping.get(&unit_int).unwrap().to_string();
         if unit == "0" {
             return format!("{} Mươi", unit_by_ten);
-        }
-        else if unit_int == 1 {
+        } else if unit_int == 1 {
             unit = String::from("Mốt");
         }
         format!("{} Mươi {}", unit_by_ten, unit)
-    }
-    else {
+    } else {
         let unit = mapping.get(&(&number - 10)).unwrap().to_string();
         format!("Mười {}", unit)
     };
