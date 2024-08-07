@@ -7,14 +7,15 @@
 use chrono::NaiveDate;
 use chrono::NaiveDateTime;
 use chrono::NaiveTime;
-use bigdecimal::BigDecimal;
 use uuid::Uuid;
 use chrono::DateTime;
 use chrono::offset::Utc;
 use diesel::prelude::*;
+use bigdecimal::BigDecimal;
+use rocket::serde::Serialize;
 
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::activities)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Activity {
@@ -31,7 +32,7 @@ pub struct Activity {
     pub user_id: Option<i32>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::api_advertisement)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Advertisement {
@@ -47,7 +48,7 @@ pub struct Advertisement {
     pub link: Option<String>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::api_category)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Category {
@@ -60,7 +61,7 @@ pub struct Category {
     pub parent_id: Option<i32>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::api_configuration)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Configuration {
@@ -73,7 +74,7 @@ pub struct Configuration {
     pub value: String,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::api_countryimages)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Countryimage {
@@ -95,7 +96,7 @@ pub struct Countryimage {
     pub city: Option<String>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::api_crawlingpost)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Crawlingpost {
@@ -126,7 +127,7 @@ pub struct Crawlingpost {
     pub state_id: Option<i32>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::api_crawlingpost_pin)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct CrawlingpostPin {
@@ -135,7 +136,7 @@ pub struct CrawlingpostPin {
     pub user_id: i32,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::api_customservice)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Customservice {
@@ -144,7 +145,7 @@ pub struct Customservice {
     pub content: String,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::api_hotel)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Hotel {
@@ -167,7 +168,7 @@ pub struct Hotel {
     pub district: Option<String>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::api_hotelservice)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Hotelservice {
@@ -180,7 +181,7 @@ pub struct Hotelservice {
     pub service_description: String,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::api_hotelserviceasset)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Hotelserviceasset {
@@ -191,7 +192,7 @@ pub struct Hotelserviceasset {
     pub hotel_service_id: i32,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::api_hotelservicerequest)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Hotelservicerequest {
@@ -204,7 +205,7 @@ pub struct Hotelservicerequest {
     pub user_id: i32,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::api_prices)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Price {
@@ -226,7 +227,7 @@ pub struct Price {
     pub additional_credit: Option<f64>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::api_referencecost)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Referencecost {
@@ -240,7 +241,7 @@ pub struct Referencecost {
     pub country_name: Option<String>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::api_sim)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Sim {
@@ -271,7 +272,7 @@ pub struct Sim {
     pub sent_email: bool,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::api_simidmapper)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Simidmapper {
@@ -294,7 +295,7 @@ pub struct Simidmapper {
     pub sale_partner_id: Option<i32>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::api_simidmapper_products)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct SimidmapperProduct {
@@ -303,7 +304,7 @@ pub struct SimidmapperProduct {
     pub product_id: i32,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::api_state)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct State {
@@ -316,7 +317,7 @@ pub struct State {
     pub parent_id: Option<i32>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::api_topuptransaction)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Topuptransaction {
@@ -330,7 +331,7 @@ pub struct Topuptransaction {
     pub source: String,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::api_topuptransactionbyapi)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Topuptransactionbyapi {
@@ -344,7 +345,7 @@ pub struct Topuptransactionbyapi {
     pub package_id: Option<i32>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::api_topuptransactionbyhotel)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Topuptransactionbyhotel {
@@ -358,7 +359,7 @@ pub struct Topuptransactionbyhotel {
     pub sim_id: Option<i32>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::api_useractivity)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Useractivity {
@@ -370,7 +371,7 @@ pub struct Useractivity {
     pub user_id: i32,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::api_vhcategory)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Vhcategory {
@@ -379,7 +380,7 @@ pub struct Vhcategory {
     pub descriptions: String,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::api_virtualholiday)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Virtualholiday {
@@ -393,7 +394,7 @@ pub struct Virtualholiday {
     pub category_id: Option<i32>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::auth_group)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct AuthGroup {
@@ -401,7 +402,7 @@ pub struct AuthGroup {
     pub name: String,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::auth_group_permissions)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct AuthGroupPermission {
@@ -410,7 +411,7 @@ pub struct AuthGroupPermission {
     pub permission_id: i32,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::auth_permission)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct AuthPermission {
@@ -420,7 +421,7 @@ pub struct AuthPermission {
     pub name: String,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::auth_user)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct AuthUser {
@@ -437,7 +438,7 @@ pub struct AuthUser {
     pub last_name: String,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::auth_user_groups)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct AuthUserGroup {
@@ -446,7 +447,7 @@ pub struct AuthUserGroup {
     pub group_id: i32,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::auth_user_user_permissions)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct AuthUserUserPermission {
@@ -455,7 +456,7 @@ pub struct AuthUserUserPermission {
     pub permission_id: i32,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(primary_key(key))]
 #[diesel(table_name = crate::schema::authtoken_token)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
@@ -465,7 +466,7 @@ pub struct AuthtokenToken {
     pub user_id: i32,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::card_blacklist)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct CardBlacklist {
@@ -479,7 +480,7 @@ pub struct CardBlacklist {
     pub end_time: Option<NaiveTime>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::card_whitelist)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct CardWhitelist {
@@ -495,7 +496,7 @@ pub struct CardWhitelist {
     pub updated: DateTime<Utc>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::corsheaders_corsmodel)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct CorsheadersCorsmodel {
@@ -503,7 +504,7 @@ pub struct CorsheadersCorsmodel {
     pub cors: String,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(primary_key(name))]
 #[diesel(table_name = crate::schema::currency_cache)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
@@ -514,7 +515,7 @@ pub struct CurrencyCache {
     pub country: String,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(primary_key(number))]
 #[diesel(table_name = crate::schema::custom_offer_creditpromotion)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
@@ -524,7 +525,7 @@ pub struct CustomOfferCreditpromotion {
     pub benefit_id: Option<i32>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::custom_offer_custombenefit)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct CustomOfferCustombenefit {
@@ -535,7 +536,7 @@ pub struct CustomOfferCustombenefit {
     pub product_types: Vec<Option<String>>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::custom_offer_custombenefit_pricing_plans)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct CustomOfferCustombenefitPricingPlan {
@@ -544,7 +545,7 @@ pub struct CustomOfferCustombenefitPricingPlan {
     pub prices_id: i32,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::custom_offer_custombenefit_products)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct CustomOfferCustombenefitProduct {
@@ -553,7 +554,7 @@ pub struct CustomOfferCustombenefitProduct {
     pub product_id: i32,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::custom_offer_customvoucher)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct CustomOfferCustomvoucher {
@@ -566,7 +567,7 @@ pub struct CustomOfferCustomvoucher {
     pub one_time: bool,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::custom_offer_redeemlog)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct CustomOfferRedeemlog {
@@ -579,7 +580,7 @@ pub struct CustomOfferRedeemlog {
     pub product_id: Option<i32>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::device_blacklist)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct DeviceBlacklist {
@@ -590,7 +591,7 @@ pub struct DeviceBlacklist {
     pub location: serde_json::Value,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::django_admin_log)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct DjangoAdminLog {
@@ -604,7 +605,7 @@ pub struct DjangoAdminLog {
     pub action_time: NaiveDateTime,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::django_celery_beat_clockedschedule)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct DjangoCeleryBeatClockedschedule {
@@ -612,7 +613,7 @@ pub struct DjangoCeleryBeatClockedschedule {
     pub clocked_time: DateTime<Utc>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::django_celery_beat_crontabschedule)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct DjangoCeleryBeatCrontabschedule {
@@ -625,7 +626,7 @@ pub struct DjangoCeleryBeatCrontabschedule {
     pub timezone: String,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::django_celery_beat_intervalschedule)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct DjangoCeleryBeatIntervalschedule {
@@ -634,7 +635,7 @@ pub struct DjangoCeleryBeatIntervalschedule {
     pub period: String,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::django_celery_beat_periodictask)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct DjangoCeleryBeatPeriodictask {
@@ -663,7 +664,7 @@ pub struct DjangoCeleryBeatPeriodictask {
     pub expire_seconds: Option<i32>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::django_celery_beat_solarschedule)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct DjangoCeleryBeatSolarschedule {
@@ -673,7 +674,7 @@ pub struct DjangoCeleryBeatSolarschedule {
     pub longitude: BigDecimal,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::django_content_type)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct DjangoContentType {
@@ -682,7 +683,7 @@ pub struct DjangoContentType {
     pub model: String,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::django_flatpage)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct DjangoFlatpage {
@@ -695,7 +696,7 @@ pub struct DjangoFlatpage {
     pub registration_required: bool,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::django_flatpage_sites)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct DjangoFlatpageSite {
@@ -704,7 +705,7 @@ pub struct DjangoFlatpageSite {
     pub site_id: i32,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::django_mailbox_mailbox)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct DjangoMailboxMailbox {
@@ -716,7 +717,7 @@ pub struct DjangoMailboxMailbox {
     pub last_polling: Option<DateTime<Utc>>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::django_mailbox_message)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct DjangoMailboxMessage {
@@ -735,7 +736,7 @@ pub struct DjangoMailboxMessage {
     pub eml: Option<String>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::django_mailbox_messageattachment)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct DjangoMailboxMessageattachment {
@@ -745,7 +746,7 @@ pub struct DjangoMailboxMessageattachment {
     pub message_id: Option<i32>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::django_migrations)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct DjangoMigration {
@@ -755,7 +756,7 @@ pub struct DjangoMigration {
     pub applied: NaiveDateTime,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(primary_key(session_key))]
 #[diesel(table_name = crate::schema::django_session)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
@@ -765,7 +766,7 @@ pub struct DjangoSession {
     pub expire_date: NaiveDateTime,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::django_site)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct DjangoSite {
@@ -774,7 +775,7 @@ pub struct DjangoSite {
     pub domain: String,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::email_message)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct EmailMessage {
@@ -789,7 +790,7 @@ pub struct EmailMessage {
     pub json: Option<serde_json::Value>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::email_subscriber)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct EmailSubscriber {
@@ -799,7 +800,7 @@ pub struct EmailSubscriber {
     pub created: DateTime<Utc>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::external_order)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct ExternalOrder {
@@ -815,7 +816,7 @@ pub struct ExternalOrder {
     pub booking_date: Option<DateTime<Utc>>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::fcm_django_fcmdevice)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct FcmDjangoFcmdevice {
@@ -829,7 +830,7 @@ pub struct FcmDjangoFcmdevice {
     pub user_id: Option<i32>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::get_sim_rules)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct GetSimRule {
@@ -839,7 +840,7 @@ pub struct GetSimRule {
     pub value: String,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::hotel_topup_history)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct HotelTopupHistory {
@@ -851,7 +852,7 @@ pub struct HotelTopupHistory {
     pub hotel_id: i32,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::journal)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Journal {
@@ -867,7 +868,7 @@ pub struct Journal {
     pub user_id: Option<i32>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(primary_key(name))]
 #[diesel(table_name = crate::schema::journal_category)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
@@ -877,7 +878,7 @@ pub struct JournalCategory {
     pub updated: DateTime<Utc>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::journal_images)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct JournalImage {
@@ -890,7 +891,7 @@ pub struct JournalImage {
     pub activities_id: Option<i32>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::nation_seal)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct NationSeal {
@@ -903,7 +904,7 @@ pub struct NationSeal {
     pub created: DateTime<Utc>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::nation_seal_user)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct NationSealUser {
@@ -912,7 +913,7 @@ pub struct NationSealUser {
     pub user_id: i32,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::notifications_promonotification)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct NotificationsPromonotification {
@@ -924,7 +925,7 @@ pub struct NotificationsPromonotification {
     pub type_: String,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::notifications_promonotification_users)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct NotificationsPromonotificationUser {
@@ -933,7 +934,7 @@ pub struct NotificationsPromonotificationUser {
     pub user_id: i32,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::notifications_promonotificationreadby)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct NotificationsPromonotificationreadby {
@@ -943,7 +944,7 @@ pub struct NotificationsPromonotificationreadby {
     pub user_id: i32,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::oauth2_provider_accesstoken)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Oauth2ProviderAccesstoken {
@@ -959,7 +960,7 @@ pub struct Oauth2ProviderAccesstoken {
     pub id_token_id: Option<i64>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::oauth2_provider_application)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Oauth2ProviderApplication {
@@ -978,7 +979,7 @@ pub struct Oauth2ProviderApplication {
     pub post_logout_redirect_uris: String,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::oauth2_provider_grant)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Oauth2ProviderGrant {
@@ -997,7 +998,7 @@ pub struct Oauth2ProviderGrant {
     pub claims: String,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::oauth2_provider_idtoken)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Oauth2ProviderIdtoken {
@@ -1011,7 +1012,7 @@ pub struct Oauth2ProviderIdtoken {
     pub user_id: Option<i32>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::oauth2_provider_refreshtoken)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Oauth2ProviderRefreshtoken {
@@ -1025,7 +1026,7 @@ pub struct Oauth2ProviderRefreshtoken {
     pub revoked: Option<DateTime<Utc>>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::package_settings)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct PackageSetting {
@@ -1038,7 +1039,7 @@ pub struct PackageSetting {
     pub product_id: i32,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::payment_intent_request)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct PaymentIntentRequest {
@@ -1053,7 +1054,7 @@ pub struct PaymentIntentRequest {
     pub updated: DateTime<Utc>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::personalities)]
 pub struct Personality {
     pub id: i32,
@@ -1069,7 +1070,7 @@ pub struct Personality {
     pub country_name: Option<String>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::point_transactions)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct PointTransaction {
@@ -1084,7 +1085,7 @@ pub struct PointTransaction {
     pub profile_id: Option<i32>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::post_card)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct PostCard {
@@ -1098,7 +1099,7 @@ pub struct PostCard {
     pub type_: String,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::post_card_frame)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct PostCardFrame {
@@ -1112,7 +1113,7 @@ pub struct PostCardFrame {
     pub country_iso_code: Option<String>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::post_card_to_user)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct PostCardToUser {
@@ -1121,7 +1122,7 @@ pub struct PostCardToUser {
     pub user_id: i32,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::rates)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Rate {
@@ -1135,7 +1136,7 @@ pub struct Rate {
     pub active: bool,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::redemptions)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Redemption {
@@ -1149,7 +1150,7 @@ pub struct Redemption {
     pub program_type: String,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::redemptions_products)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct RedemptionsProduct {
@@ -1158,7 +1159,7 @@ pub struct RedemptionsProduct {
     pub product_id: i32,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::rest_framework_api_key_apikey)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct RestFrameworkApiKeyApikey {
@@ -1171,7 +1172,7 @@ pub struct RestFrameworkApiKeyApikey {
     pub prefix: String,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::shop_module_cartitem)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct CartItem {
@@ -1196,7 +1197,7 @@ pub struct CartItem {
     pub product_id: Option<String>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(primary_key(code))]
 #[diesel(table_name = crate::schema::shop_module_currency)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
@@ -1207,7 +1208,7 @@ pub struct Currency {
     pub label: String,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::shop_module_deliveryrate)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Deliveryrate {
@@ -1219,7 +1220,7 @@ pub struct Deliveryrate {
     pub currency_id: Option<String>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::shop_module_fuppackage)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Fuppackage {
@@ -1239,7 +1240,7 @@ pub struct Fuppackage {
     pub sim_rule: Option<String>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::shop_module_joyteltransaction)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Joyteltransaction {
@@ -1254,7 +1255,7 @@ pub struct Joyteltransaction {
     pub sim_serial: String,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::shop_module_order)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Order {
@@ -1284,7 +1285,7 @@ pub struct Order {
     pub payment: serde_json::Value,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::shop_module_package)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Package {
@@ -1298,7 +1299,7 @@ pub struct Package {
     pub per_day: bool,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::shop_module_product)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Product {
@@ -1347,7 +1348,7 @@ pub struct Product {
     pub calculate_mb: i32,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::shop_module_product_packages)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct ProductPackage {
@@ -1356,7 +1357,7 @@ pub struct ProductPackage {
     pub package_id: i32,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::shop_module_product_user)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct ProductUser {
@@ -1365,7 +1366,7 @@ pub struct ProductUser {
     pub user_id: i32,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::shop_module_providerapilog)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Providerapilog {
@@ -1380,7 +1381,7 @@ pub struct Providerapilog {
     pub sim: String,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::shop_module_salepartner)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Salepartner {
@@ -1422,7 +1423,7 @@ pub struct Salepartner {
     pub uid: Option<Uuid>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(primary_key(value))]
 #[diesel(table_name = crate::schema::shop_module_status)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
@@ -1435,7 +1436,7 @@ pub struct Statu {
     pub order_index: Option<i32>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::shop_module_transaction)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Transaction {
@@ -1450,7 +1451,7 @@ pub struct Transaction {
     pub user_id: Option<i32>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::sim_package)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct SimPackage {
@@ -1475,7 +1476,7 @@ pub struct SimPackage {
     pub joytel_rsp_order_id: Option<String>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::socialaccount_socialaccount)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct SocialaccountSocialaccount {
@@ -1488,7 +1489,7 @@ pub struct SocialaccountSocialaccount {
     pub extra_data: serde_json::Value,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::socialaccount_socialapp)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct SocialaccountSocialapp {
@@ -1502,7 +1503,7 @@ pub struct SocialaccountSocialapp {
     pub settings: serde_json::Value,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::socialaccount_socialapp_sites)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct SocialaccountSocialappSite {
@@ -1511,7 +1512,7 @@ pub struct SocialaccountSocialappSite {
     pub site_id: i32,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::socialaccount_socialtoken)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct SocialaccountSocialtoken {
@@ -1523,7 +1524,7 @@ pub struct SocialaccountSocialtoken {
     pub app_id: Option<i32>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::taggit_tag)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct TaggitTag {
@@ -1532,7 +1533,7 @@ pub struct TaggitTag {
     pub slug: String,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::taggit_taggeditem)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct TaggitTaggeditem {
@@ -1542,7 +1543,7 @@ pub struct TaggitTaggeditem {
     pub tag_id: i32,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::top_essential)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct TopEssential {
@@ -1562,7 +1563,7 @@ pub struct TopEssential {
     pub country_name: Option<String>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::translations)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Translation {
@@ -1572,7 +1573,7 @@ pub struct Translation {
     pub active: bool,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::user_application)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct UserApplication {
@@ -1582,7 +1583,7 @@ pub struct UserApplication {
     pub user_id: i32,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::user_application_profile)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct UserApplicationProfile {
@@ -1609,7 +1610,7 @@ pub struct UserApplicationProfile {
     pub tier: String,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::user_balance)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct UserBalance {
@@ -1621,7 +1622,7 @@ pub struct UserBalance {
     pub user_id: i32,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::user_blacklist)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct UserBlacklist {
@@ -1632,7 +1633,7 @@ pub struct UserBlacklist {
     pub location: serde_json::Value,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::user_passport)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct UserPassport {
@@ -1646,7 +1647,7 @@ pub struct UserPassport {
     pub user_id: Option<i32>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(table_name = crate::schema::visited_location)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct VisitedLocation {
@@ -1662,7 +1663,7 @@ pub struct VisitedLocation {
     pub user_id: Option<i32>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(primary_key(key))]
 #[diesel(table_name = crate::schema::weather_cache)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
@@ -1675,7 +1676,7 @@ pub struct WeatherCache {
     pub long: Option<String>,
 }
 
-#[derive(Queryable, Selectable, Debug, Identifiable)]
+#[derive(Serialize, Queryable, Selectable, Debug, Identifiable)]
 #[diesel(primary_key(request_id))]
 #[diesel(table_name = crate::schema::zoho_email)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
