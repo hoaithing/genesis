@@ -1,31 +1,31 @@
-[debug]
+[global]
 address = "0.0.0.0"
 port = 8888
 workers = 4
 keep_alive = 5
-log = "normal"
-limits = { forms = 32768 }
+log_level = "normal"
+limits = { forms = 32768, file=1000000000 }
 
-[development]
-address = "localhost"
-port = 8888
-workers = 4
-keep_alive = 5
-log = "normal"
-limits = { forms = 32768 }
-
-[staging]
-address = "0.0.0.0"
-port = 8888
-workers = 4
-keep_alive = 5
-log = "normal"
-limits = { forms = 32768 }
-
-[production]
-address = "0.0.0.0"
-port = 8888
-workers = 4
-keep_alive = 5
-log = "critical"
-limits = { forms = 32768 }
+#[development]
+#address = "0.0.0.0"
+#port = 8888
+#workers = 4
+#keep_alive = 5
+#log = "normal"
+#limits = { forms = 32768 }
+#
+#[staging]
+#address = "0.0.0.0"
+#port = 8888
+#workers = 4
+#keep_alive = 5
+#log = "normal"
+#limits = { forms = 32768 }
+#
+#[production]
+#address = "0.0.0.0"
+#port = 8888
+#workers = 4
+#keep_alive = 5
+#log = "normal"
+#limits = { forms = 32768 }

@@ -1,4 +1,3 @@
-use diesel::prelude::*;
 use genesis::{list_orders, logs};
 use rocket::{launch, routes, Build, Rocket};
 

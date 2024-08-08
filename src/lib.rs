@@ -39,7 +39,7 @@ pub fn logs(file_name: &str) -> String {
         "Invalid file name".to_string()
     } else {
         let content = fs::read_to_string(file_name);
-        "cherry".to_string()
+        content.unwrap()
     }
 }
 
